@@ -1,0 +1,47 @@
+          CREATING A GOOGLE SEARCH ENGINE CLONE
+
+Source: https://www.youtube.com/watch?v=h9zlVmoUV5I&t=120s&ab_channel=React%26NextjsProjectswithSahand
+Repo: https://github.com/sahandghavidel/google-clone-nextjs13
+
+Vamos a crear un proyecto next,pero siguiendo las directrices del autor del contenido,usando el directorio app(investigar ventajas):
+>npx create-next-app@latest --experimental-app
+
+IMPORTANTE: al usar esta forma la estructura de directorios cambia un poco ya que la api ahora cuelga de src/app/api y no de pages/api.Lo mismo sucede con pages que ahora no está en la raiz sino que cuelga de srs/app/pages.En la version 13 han ido más allá
+
+Favicon de Google: el autor explica como podemos ir a freesvg.org y buscar por el favicon de Google de forma libre(bajar el svg para que escale perfect).Arrastramos al IDE,etc
+
+Minuto 35: ahora si,vamos a instalar Tailwind en nuestro proyecto de Next:
+>npm install -D tailwindcss postcss autoprefixer
+>npx tailwindcss init -p (esto crea el tailwind.config y el postcss.config)
+
+NOTA: faltaría agregar las rutas para que Tailwind sepa donde escanear.Desde luego no puede ser más sencillo integrar Tailwind a un proyecto en Next.
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // fijate que Tailwind necesita las rutas para poder escanear estos directorios e interpretar
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+Minuto 54: vamos a usar react icons para los iconos(fijate que ésta engloba a hero icons,es la tocha):
+>npm install react-icons --save  
+
+NOTA: fijate en como Tailwind tmb tiene clases para targetear en una transition a menos elementos(transition-rule) y en como cambiar el brightness fácilmente:
+
+<button className="bg-blue-500 text-white px-6 py-2 font-medium rounded-md hover:brightness-105 hover:shadow-md transition-shadow duration-300">Sign in</button>
+
+1h 10m: sección central(search bar section).Seguimos estilizando la sección central,es un simple form en flex con dos iconos y el input como hijos.Más abajo dos botones.Fijate en el uso de la pseudo-clase focus-within para mantener el border-shadow
+
+1h 48: para recibir un termino random vamos a usar una API subida a Heroku(por el autor ??) que retorna una simple palabra random en cada GET.La API está aqui:
+http://random-word-api.herokuapp.com/home
+Y para que devuelva un termino random el endpoint es(https://random-word-api.herokuapp.com/word)
+
+NOTA: fijate que el autor recomienda una web muy buena para generar loadings/spinners
+
