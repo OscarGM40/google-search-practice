@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import "../styles/globals.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         content="Next app clone portfolio purposes,still you owe me 1000$ bucks for each search"
       />
       <link rel="icon" href="/images/google-logo-3.webp" />
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

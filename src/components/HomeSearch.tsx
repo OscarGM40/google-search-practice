@@ -26,7 +26,7 @@ const HomeSearch = () => {
   const randomSearch = async (evt: MouseEvent) => {
     setRndSearchLoading(true);
     // necesarios si vamos a redirigir ??
-    evt.preventDefault();
+    // evt.preventDefault();
     const term = await getRandomWord();
     if (!term) return;
     router.push(`/search?query=${term}`);
