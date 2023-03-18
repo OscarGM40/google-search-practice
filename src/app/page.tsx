@@ -2,12 +2,9 @@ import HomeSearch from "@/components/HomeSearch";
 import HomeHeader from "@/components/HomeHeader";
 import { NextPage } from "next";
 import Image from "next/image";
+import { getRandomImage } from "@/helpers/getRandomImage";
 
 
-const getRandomImage = () => {
-  const rnd = Math.floor(Math.random() * 2);
-  return rnd === 1 ? "/images/google-logo.png" : "/images/google-logo-2.png";
-};
 
 // recuerda que una Page en Next debe usar una export default
 const page: NextPage = () => {

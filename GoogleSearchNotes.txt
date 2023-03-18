@@ -53,6 +53,17 @@ Como GEolocation API vamos a usar extreme-ip-lookup.Puedo ver que tiene una tier
 NOTA: fijate que tengo que obligar a usar client side rendering en ciertos componentes,como el div con la petición.Esto puede crear un pequeño delay a la hora de pintar el componente(y fijate como por defecto y por lo mismo Next usará server side si puede,ya que renderiza antes).Espectacular
 
 2h50: vamos a crear las rutas /search/image y search/web.En esta aplicación hay que crear las rutas al parecer siempre con el nombre page.tsx y crear directorios por segmento de url(luego tengo que crear app/search/image/page.tsx).Supongo que es en esta forma experimental sólo.
+Fijate que en app/api irán los endpoints.
 
-Fijate que en app/api van los endpoints
 Fijate tmb que podria crear otro layout.tsx en search/image para crear sublayouts.Muy interesante esto.Obviamente el layout que está en app/layout se renderiza en todos.Y para sobrescribir el cmp <Head /> tengo que hacerlo de esta forma,si no sólo veré lo mismo
+He aprendido que si tengo que crear algo comun para dos componentes/archivos tengo que crearlo en el componente padre común a ambos
+
+3h: vamos a crear el header para las pages que empiecen por /search
+NOTA:fijate como elige transition-all en cuanto tenemos el hover sobre el brightness y sobre un shadow pues queremos animar ambos
+
+TIP: la única diferencia entre display: flex y display: inline-flex es que inline-flex pone al contenedor(y solo al contenedor) en inline.En este punto fijate que un contenedor flex nace en bloque(un <span class="flex> va a coger todo el ancho).Es importantisimo saber que un contenedor flex coge todo el ancho y si quiero que coga menos lo tengo que poner en inline-flex.
+
+
+Minuto 3h 41: fijate que el hook para acceder a los params desde next13 se llama useSearchParams:
+
+ const params = useSearchParams()
