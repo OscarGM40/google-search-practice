@@ -41,3 +41,4 @@ const SearchBox = () => {
   );
 };
 export default SearchBox;
+// el modelo vista presentador es una variación del modelo vista controlador en el que el modelo es una interfaz que define los datos(dtos y modelos) el presentador actua sobre el modelo y la vista,recuperando datos de los repositorios y formateandolos para la vista.La vista es una interfaz pasiva que exhibe los datos.Parece algo de C#/Java y PHP,igual que el MVVM(Model-View-ViewModel)
