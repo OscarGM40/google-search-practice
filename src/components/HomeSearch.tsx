@@ -20,7 +20,7 @@ const HomeSearch = () => {
     if (!input.trim()) return;
     console.log({ input });
     // redirect with the next-router v13 from next/navigation
-    router.push(`/search?query=${input}`);
+    router.push(`/search/web?searchTerm=${input}`);
   };
 
   const randomSearch = async (evt: MouseEvent) => {
@@ -29,7 +29,7 @@ const HomeSearch = () => {
     // evt.preventDefault();
     const term = await getRandomWord();
     if (!term) return;
-    router.push(`/search?query=${term}`);
+    router.push(`/search/web?searchTerm=${term}`);
     setRndSearchLoading(false);
   };
 

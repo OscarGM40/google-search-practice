@@ -120,3 +120,41 @@ const WebSearchPage = async ({ searchParams }: Props) => {
   return <>{results && results.map((result: any, i: number) => <h1 key={i}>{result.title}</h1>)}</>;
 };
 export default WebSearchPage;
+4h48m: handle possible errors.En Next JS(desde la 13 ) puedo crear un file llamado 'error.js' que manejará los errrores en ese file.Dado que queremos manejar los errores tanto para /serch/web como search/image lo pondremos a la altura de search y no de sus hijos.
+El autor confirma que es algo exclusivo de Next 13.Y tiene que ser un componente funcional bajo "use client" ya que es la UI a devolver.Esta funcion recogerá automáticamente dos argumentos,el error y una funcion llamada reset para resetear el error:
+
+
+const Error = ({ error, reset }: { error: string; reset: Function }) => {
+  useEffect(() => {
+    console.log("Error: ", error);
+  }, [error]);
+
+  return (
+    <div className="flex flex-col justify-center items-center pt-10">
+      <h1 className="text-3xl mb-4">Something went wrong</h1>
+      <button className="text-blue-500" onClick={() => reset()}>
+        Try again
+      </button>
+    </div>
+  );
+};
+export default Error;
+
+5h05: creando el componente que muestra las busquedas.Fijate que esta Api devuelve Html.Para poder parsearlo vamos a usar una libreria de terceros para parsear html en react.Se llama html-react-parser, a saber porque.
+
+>npm i html-react-parser
+
+Es muy facil de usar,solo hay que usar su método parse pasandole html:
+const parse = require("html-react-parser")
+parse('<p>hello</p>)
+
+* Al final cambié el nombre de la export default a HTMLReactParser
+ <p className="">{HTMLReactParser(result.htmlSnippet)}</p>
+
+5h40m: para buscar imagenes es exactamente igual,pero añadiendo un queryParam 'searchType' con el valor 'image':
+
+  const response = await fetch(
+    ` https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&searchType=image`,
+  );
+
+  
