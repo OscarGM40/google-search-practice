@@ -157,4 +157,50 @@ parse('<p>hello</p>)
     ` https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&searchType=image`,
   );
 
-  
+  6h10m: paginacion.Sabiendo que la API ya ofrece busquedas paginadas solo hay que llamar a cad peticion con el indice correcto.Para ello vamos a crear una propiedad llamada 'start' en los searchParams:
+
+
+  const WebSearchPage = async ({ searchParams }: Props) => {
+  const startIndex = searchParams.start || "1";
+  const response = await fetch(
+    ` https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&start=${startIndex}`,
+  );
+
+Y cada icono será un link con un valor diferente para esa variable.Ese queryParam lo ha montado el back de ellos,por eso puedo acceder con searchParams.get('start'):
+
+"use client";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
+const PaginationButtons = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  // necesitamos el termino de busqueda
+  const searchTerm = searchParams.get("searchTerm");
+  // si viene este queryParam lo rescato,si no viene lo inicializo a 1 como Number.Ojo con los parseos
+  const startIndex = +(searchParams.get("start") || 1);
+
+  return (
+    <div className="text-blue-700 flex px-10 pb-4 justify-between sm:justify-start sm:space-x-44  md:space-x-64 sm:px-0">
+      {startIndex >= 10 && (
+        // pathname será o /web o /image(el ultimo segmento)
+        <Link href={`${pathname}?searchTerm=${searchTerm}&start=${startIndex - 10}`}>
+          <div className="flex flex-col cursor-pointer items-center hover:underline">
+            <BsChevronLeft className="h-5" />
+            <p>Previous</p>
+          </div>
+        </Link>
+      )}
+      {startIndex <= 90 && (
+        // pathname será o /web o /image(el ultimo segmento)
+        <Link href={`${pathname}?searchTerm=${searchTerm}&start=${startIndex + 10}`}>
+          <div className="flex flex-col cursor-pointer items-center hover:underline">
+            <BsChevronRight className="h-5" />
+            <p>Next</p>
+          </div>
+        </Link>
+      )}
+    </div>
+
+6h48m

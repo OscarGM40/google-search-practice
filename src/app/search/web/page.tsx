@@ -9,13 +9,15 @@ type Props = {
   };
   searchParams: {
     searchTerm?: string;
+    start?: string;
   };
 };
-
+// fijate que en el cliente tendria que acceder a los params con el hook useSearchParams, en el server es diferente y ya tengo acceso a él con una prop(que es como si llamara al hook simplemente,entiendo.Aunque cambia un poco el type solo)
 // tmb es muy facil sacar un queryParam desde Next13,simplemente pasando un argumento llamado searchParams
 const WebSearchPage = async ({ searchParams }: Props) => {
+  const startIndex = searchParams.start || "1";
   const response = await fetch(
-    ` https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}`,
+    ` https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&start=${startIndex}`,
   );
 
   // desde Next 13 puedo crear un file llamado error.js que capturará el error.La altura a la que se cree el file determinará donde se captura el error(en este caso queremos que sea tanto /search/web como /search/image luego lo ponemos en /search/error.ts)
