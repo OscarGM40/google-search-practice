@@ -203,4 +203,12 @@ const PaginationButtons = () => {
       )}
     </div>
 
-6h48m
+6h48m: de nuevo Next 13 introduce una convención para crear archivos de loading(por defecto este archivo va a usar server side rendering,aunque puede usarse como client side rendering con "use client").Segun la altura del sistema de ficheros donde lo ponga va a esperar a que la pagina esté ready(luego esperara por procesos asincronos que la afecten)
+
+NOTA:parece que la funcion se tiene que llamar loading:
+
+export default function loading(){
+  return (
+    <div>loading...</div>
+  )
+}
