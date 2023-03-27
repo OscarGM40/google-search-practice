@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // esta pagina es SSR,desde la version 13 ya no necesitamos funciones extra(getServerSideProps)
 
 import WebSearchResults from "@/components/WebSearchResults";
